@@ -1,0 +1,23 @@
+---
+name: CMPSC 302 Open
+break: true
+indent: 4
+---
+
+docs/style/play.css:
+    MatchFileFragment --fragment "TODO" --count 0 --exact --description "[CSS] play.css contains no TODOs"
+
+docs/holes/9.html:
+    MatchFileFragment --fragment "TODO" --count 0 --exact --description "[HTML] holes/9.html has no TODOs."
+
+ExecuteCommand --command "html5validator --root docs/" --description "[HTML] The docs/ directory passes W3C validation"
+ExecuteCommand --command "html5validator --root docs/style --skip-non-css" --description "[CSS] The docs/ directory passes W3C validation"
+ExecuteCommand --command "python config/.selenium.py holes/1" --description "[GOLF] Hole 1 complete"
+ExecuteCommand --command "python config/.selenium.py holes/2" --description "[GOLF] Hole 2 complete"
+ExecuteCommand --command "python config/.selenium.py holes/3" --description "[GOLF] Hole 3 complete"
+ExecuteCommand --command "python config/.selenium.py holes/4" --description "[GOLF] Hole 4 complete"
+ExecuteCommand --command "python config/.selenium.py holes/5" --description "[GOLF] Hole 5 complete"
+ExecuteCommand --command "python config/.selenium.py holes/6" --description "[GOLF] Hole 6 complete"
+ExecuteCommand --command "python config/.selenium.py holes/7" --description "[GOLF] Hole 7 complete"
+ExecuteCommand --command "python config/.selenium.py holes/8" --description "[GOLF] Hole 8 complete"
+ExecuteCommand --command "python config/.selenium.py holes/9" --description "[GOLF] Hole 9 complete"
