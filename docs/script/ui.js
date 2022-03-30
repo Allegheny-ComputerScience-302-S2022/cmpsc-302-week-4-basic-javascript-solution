@@ -27,10 +27,10 @@ function activateButton(id) {
     const sound = document.querySelector(`[data-sound='${data}']`);
     sound.play();
     elem.style.backgroundColor = "#FFFFFF";
-  },500);
+  },600);
   setTimeout(function(){
     elem.style.backgroundColor = origBg;
-  },550);
+  },650);
 }
 
 function playbackPattern() {
@@ -43,7 +43,7 @@ function playbackPattern() {
     if(i >= pattern.length){
       clearInterval(replay);
     }
-  },600);
+  },200);
 }
 
 function playerTurn() {
