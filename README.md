@@ -44,11 +44,11 @@ information population. For the purposes of our assignment, they're relatively g
 
 ###### Desktop
 
-![On yr main](https://raw.githubusercontent.com/Allegheny-ComputerScience-302-S2022/cmpsc-302-week-4-basic-javascript-solution/media/media/desktop-wireframe.png)
+![On yr main](https://allegheny-computerscience-302-s2022.github.io/cmpsc-302-week-4-basic-javascript-solution/media/desktop-wireframe.png)
 
 ###### Mobile
 
-![On the Go](https://raw.githubusercontent.com/Allegheny-ComputerScience-302-S2022/cmpsc-302-week-4-basic-javascript-solution/media/media/mobile-wireframe.png)
+![On the Go](https://allegheny-computerscience-302-s2022.github.io/cmpsc-302-week-4-basic-javascript-solution/media/desktop-wireframe.png)
 
 #### Functionality
 
