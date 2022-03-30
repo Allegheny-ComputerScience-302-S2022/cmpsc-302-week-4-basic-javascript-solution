@@ -26,17 +26,18 @@ function activateButton(id) {
     const sound = document.querySelector(`[data-sound='${data}']`);
     sound.play();
     elem.style.backgroundColor = "#FFFFFF";
-  },200);
+  },1000);
   setTimeout(function(){
     elem.style.backgroundColor = origBg;
-  },250);
+  },1250);
 }
 
 function playbackPattern() {
-  for(i = 0; i < pattern.length; i++) {
+  for(var i = 0; i < pattern.length; i++) {
+    var id = pattern[i];
     setTimeout(function() {
-      activateButton(pattern[i]);
-    },100);
+      activateButton(id);
+    },500);
   }
 }
 
@@ -47,22 +48,24 @@ function playerTurn() {
   pattern.push(generatePattern(level));
   playbackPattern();
   locked = false;
-  setTimeout(function() {
-    if(!checkPatterns() && !locked) {
-      const sound = document.querySelector(`[data-sound='lose']`);
-      for(var i = 0; i < 3; i ++){
-        sound.play();
+  if(!locked){
+    setTimeout(function() {
+      if(!checkPatterns()) {
+        const sound = document.querySelector(`[data-sound='lose']`);
+        for(var i = 0; i < 3; i ++){
+          sound.play();
+        }
+        console.log(pattern);
+        console.log(choices);
+      } else {
+        level += 1;
+        points += 1;
+        document.getElementById("points").innerText = "Points: " + points;
+        playbackPattern();
+        playerTurn();
       }
-      console.log(pattern);
-      console.log(choices);
-    } else {
-      level += 1;
-      points += 1;
-      document.getElementById("points").innerText = "Points: " + points;
-      playbackPattern();
-      playerTurn();
-    }
-  },5000);
+    },5000);
+  }
 }
 
 document.getElementById("start-button").addEventListener('click', () => {

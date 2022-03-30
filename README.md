@@ -34,7 +34,8 @@ make the game UI workable. To do this, there are a few requirements.
   * `bottom-left`
   * `bottom-right`
   * `start-button`
-* The design should be fully responsive, changing form when we hit the mobile "breakpoint", defined here as `700px` (this definition varies)
+* The score display in the footer should be give the ID `points` (see above for required contents)
+* The design should be fully responsive, changing form when we hit the mobile "breakpoint", defined here as `1024px` (this definition varies)
 
 ##### Wireframes
 

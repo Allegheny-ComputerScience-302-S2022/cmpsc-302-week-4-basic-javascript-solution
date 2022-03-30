@@ -70,3 +70,26 @@ footer > #button-container button {
   background: #0000FF;
   border-radius: 0 0 100% 0;
 }
+
+@media only screen and (max-width: 1024px) {  
+  main {
+    height: 75vh;
+  }
+  footer {
+    height: 25vh;
+  }
+  main, footer {
+    grid-template-columns: auto;
+    grid-gap: 0;
+  }
+
+  main > button {
+    margin: 1vh 0;
+    padding: 1vh 0;
+  }
+
+  #top-left, #top-right, #bottom-left, #bottom-right {
+    border-radius: 0;
+  }
+
+}
