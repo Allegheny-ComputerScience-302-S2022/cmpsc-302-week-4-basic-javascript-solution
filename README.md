@@ -48,7 +48,7 @@ information population. For the purposes of our assignment, they're relatively g
 
 ###### Mobile
 
-![On the Go](https://allegheny-computerscience-302-s2022.github.io/cmpsc-302-week-4-basic-javascript-solution/media/desktop-wireframe.png)
+![On the Go](https://allegheny-computerscience-302-s2022.github.io/cmpsc-302-week-4-basic-javascript-solution/media/mobile-wireframe.png)
 
 #### Functionality
 
