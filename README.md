@@ -58,7 +58,8 @@ information population. For the purposes of our assignment, they're relatively g
   * This should convert the "Press Start to Play" text to a "Points: ##" display (where `##` is the varying number of points
 * The game should generate random patterns that increase by 1 additional step after each "successful" round
   * Here, "successful" means that a player achieved the demonstrated pattern in the given amount of time
-* The player's turn "fails" if they take more than `5` seconds to enter any one part of the pattern
+* The player's turn "fails" if they take more than `5 * level` seconds to enter any one part of the pattern
+  * `level` should be taken to mean the number of steps in the pattern
 * On each successfuly turn, a player's score should increase by `1`
 * If a player fails to complete the pattern, the start button should turn a "Game Over" button, and the game should stop.
 

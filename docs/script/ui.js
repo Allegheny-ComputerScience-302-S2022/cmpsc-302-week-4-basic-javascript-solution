@@ -3,6 +3,7 @@ let points = 0;
 let locked = true;
 let pattern = [];
 let winning = true;
+let delay = 5000;
 
 function generatePattern() {
   const buttons = ["top-left","top-right","bottom-left","bottom-right"];
@@ -26,19 +27,23 @@ function activateButton(id) {
     const sound = document.querySelector(`[data-sound='${data}']`);
     sound.play();
     elem.style.backgroundColor = "#FFFFFF";
-  },1000);
+  },500);
   setTimeout(function(){
     elem.style.backgroundColor = origBg;
-  },1250);
+  },550);
 }
 
 function playbackPattern() {
-  for(var i = 0; i < pattern.length; i++) {
-    var id = pattern[i];
-    setTimeout(function() {
-      activateButton(id);
-    },500);
-  }
+  let i = 0;
+  var replay = setInterval(function() {
+    let id = pattern[i];
+    console.log(id);
+    activateButton(id)
+    i++;
+    if(i >= pattern.length){
+      clearInterval(replay);
+    }
+  },600);
 }
 
 function playerTurn() {
@@ -64,7 +69,7 @@ function playerTurn() {
         playbackPattern();
         playerTurn();
       }
-    },5000);
+    },level * delay);
   }
 }
 
