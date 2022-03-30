@@ -32,7 +32,6 @@ def check_tag(html: BeautifulSoup, tag: str, count: int = 1) -> bool:
   tags = html.find_all(tag)
   if len(tags) < count:
     return False
-  print(f"PASSED: {tag}")
   return True
 
 def main():
