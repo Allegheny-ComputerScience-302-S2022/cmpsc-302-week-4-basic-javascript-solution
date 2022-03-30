@@ -28,6 +28,7 @@
           pip install bs4
           pip install requests
           pip install html5validator
+          python config/.wave.py index.html
       - name: Grade repository
         run: |
           source config/.pages.sh
