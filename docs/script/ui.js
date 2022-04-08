@@ -2,27 +2,37 @@
 var gameBtns = document.querySelectorAll(".game-button");
 var userChoices = [];
 var gamePattern = [];
-var delay = 5000;
+var points = 0;
+// Set delay for user response
+const delay = 7000; // <-- 7 seconds
 
 function playTurn() {
-  let step = 0;
+  let level = 0;
   userChoices = [];
+  // Begin computer part of turn
   gamePattern.push(chooseRandomButton());
   const turn = setInterval(() =>{
-    let id = gamePattern[step];
+    let id = gamePattern[level];
     activateButton(id);
-    step++;
-    if(step >= gamePattern.length){
+    level++;
+    if(level >= gamePattern.length){
       clearInterval(turn);
     }
   },1000);
-  setTimeout(()=>{
-    if(validatePattern()){
-      playTurn();
-    } else {
-      console.log("Lose");
-    }
-  }, (step + 1) * delay);
+  // Player's part of turn
+  setTimeout(() =>{
+      if(validatePattern()){
+        level++;
+        playTurn();
+        points++;
+        document.getElementById("points").innerText = `Points: ${points}`;
+      } else {
+        const sound = document.querySelector(`[data-sound='lose']`);
+        // Actually play the sound selected
+        sound.play();
+        console.log("YOU LOSE!");
+      }
+  }, (level + 1) * delay);
 }
 
 function activateButton(id) {
@@ -55,7 +65,6 @@ const chooseRandomButton = () => {
   let choice = Math.floor(Math.random() * elements.length);
   return elements[choice];
 }
-
 
 const validatePattern = () => {
   if(userChoices.length !== gamePattern.length) return false;
@@ -90,7 +99,7 @@ var startBtn = document.getElementById("start-button");
 // Handle click on start button
 startBtn.addEventListener("click", () => {
   // Reset points to 0
-  document.getElementById("points").innerText = "Points: 0";
+  document.getElementById("points").innerText = `Points: ${points}`;
   // Reset userChoices to restart game
   userChoices = [];
   gamePattern = [];
