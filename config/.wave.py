@@ -5,7 +5,7 @@ import os
 
 def main():
 
-  pages_api = os.getenv("PAGES")
+  pages_api = os.getenv("PAGES_URL")
   wave_api = os.getenv("WAVE_API")
 
   data = json.loads(pages_api)

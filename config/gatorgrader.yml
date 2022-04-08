@@ -4,6 +4,15 @@ break: true
 indent: 2
 ---
 
+docs/script/ui.js:
+  MatchFileFragment --fragment "TODO" --count 0 --exact --description "[Javascript] ui.js contains no TODOs"
+  MatchFileFragment --fragment "querySelectorAll" --count 1 --description "[Javascript] ui.js uses querySelectorAll"
+  MatchFileFragment --fragment "querySelector" --count 1 --description "[Javascript] ui.js uses querySelector"
+  MatchFileFragment --fragment "forEach" --count 1 --description "[Javascript] ui.js uses a forEach statement"
+  MatchFileFragment --fragment "innerText" --count 1 --description "[Javascript] ui.js modifies the innerText property"
+  MatchFileFragment --fragment "data-" --count 1 --description "[Javascript] ui.js targets a data- property to play a sound"
+  MatchFileFragment --fragment "play()" --count 1 --description "[Javascript] ui.js uses .play()"
+
 docs/style/style.css:
   MatchFileFragment --fragment "TODO" --count 0 --exact --description "[CSS] style.css contains no TODOs"
   MatchFileFragment --fragment "grid" --count 1 --description "[CSS] style.css creates at least one grid-based element"
@@ -21,4 +30,4 @@ ExecuteCommand --command "html5validator --root docs/" --description "[HTML] The
 ExecuteCommand --command "html5validator --root docs/style --skip-non-css" --description "[CSS] The docs/ directory passes W3C validation"
 ExecuteCommand --command "python config/.check.py docs/index.html button 5" --description "[HTML] index.html uses at least 5 <button>s"
 ExecuteCommand --command "python config/.check.py docs/index.html footer 1" --description "[HTML] index.html uses a footer"
-
+ExecuteCommand --command "python config/.wave.py index.html" --description "[CSS] Site has no contrast issues"
