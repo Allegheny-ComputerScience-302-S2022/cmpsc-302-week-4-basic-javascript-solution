@@ -1,90 +1,98 @@
-let choices = Array();
-let points = 0;
-let locked = true;
-let pattern = [];
-let winning = true;
-let delay = 5000;
+// Game buttons
+var gameBtns = document.querySelectorAll(".game-button");
+var userChoices = [];
+var gamePattern = [];
+var delay = 5000;
 
-function generatePattern() {
-  const buttons = ["top-left","top-right","bottom-left","bottom-right"];
-  let choice = Math.floor(Math.random() * buttons.length);
-  return buttons[choice];
-}
-
-function checkPatterns(){
-  if(choices.length !== pattern.length) return false;
-  for(var i = 0; i < pattern.length; i++){
-    if(pattern[i] !== choices[i]) return false;
-  }
-  return true;
+function playTurn() {
+  let step = 0;
+  userChoices = [];
+  gamePattern.push(chooseRandomButton());
+  const turn = setInterval(() =>{
+    let id = gamePattern[step];
+    activateButton(id);
+    step++;
+    if(step >= gamePattern.length){
+      clearInterval(turn);
+    }
+  },1000);
+  setTimeout(()=>{
+    if(validatePattern()){
+      playTurn();
+    } else {
+      console.log("Lose");
+    }
+  }, (step + 1) * delay);
 }
 
 function activateButton(id) {
   const elem = document.getElementById(id);
-  const data = elem.getAttribute("data-button");
-  origBg = elem.style.backgroundColor;
-  setTimeout(function(){
+  const origBg = elem.style.backgroundColor;
+  setTimeout(()=>{
+    elem.style.backgroundColor = "#FFF";
+    // Get a specific attribute from clicked element
+    const data = elem.getAttribute("data-button");
+    // Get the audio element with that attribute
     const sound = document.querySelector(`[data-sound='${data}']`);
+    // Actually play the sound selected
     sound.play();
-    elem.style.backgroundColor = "#FFFFFF";
-  },600);
-  setTimeout(function(){
+  },500);
+  setTimeout(()=> {
     elem.style.backgroundColor = origBg;
-  },650);
+  },750);
 }
 
-function playbackPattern() {
-  let i = 0;
-  var replay = setInterval(function() {
-    let id = pattern[i];
-    console.log(id);
-    activateButton(id)
-    i++;
-    if(i >= pattern.length){
-      clearInterval(replay);
-    }
-  },200);
-}
-
-function playerTurn() {
-  let level = 1;
-  choices = [];
-  locked = true;
-  pattern.push(generatePattern(level));
-  playbackPattern();
-  locked = false;
-  if(!locked){
-    setTimeout(function() {
-      if(!checkPatterns()) {
-        const sound = document.querySelector(`[data-sound='lose']`);
-        for(var i = 0; i < 3; i ++){
-          sound.play();
-        }
-        console.log(pattern);
-        console.log(choices);
-      } else {
-        level += 1;
-        points += 1;
-        document.getElementById("points").innerText = "Points: " + points;
-        playbackPattern();
-        playerTurn();
-      }
-    },level * delay);
-  }
-}
-
-document.getElementById("start-button").addEventListener('click', () => {
-  let pointDisplay = document.getElementById("points")
-  pointDisplay.innerText = "Points: " + 0;
-  pattern = [];
-  playerTurn();
+// Get all of the IDs of possible buttons
+const elements = Array.from(gameBtns).map(btn => {
+  // Return an individual id to add to the element array
+  return btn.id;
 });
 
-document.querySelectorAll(".game-button").forEach(elem => {
-  elem.addEventListener('click', function(e) {
-    if(!locked){
-      choices.push(e.target.id);
-      activateButton(e.target.id);
-    }
+// Function returning one random ID when called
+const chooseRandomButton = () => {
+  // Generate a random number between 0 and 3 to choose
+  // correct "index" from array
+  let choice = Math.floor(Math.random() * elements.length);
+  return elements[choice];
+}
+
+
+const validatePattern = () => {
+  if(userChoices.length !== gamePattern.length) return false;
+  for(var i=0; i < userChoices.length; i++){
+    if(userChoices[i] !== gamePattern[i]) return false;
+  }
+  return true;
+}
+
+// For every game button
+gameBtns.forEach(elem => {
+  // For one particular game button
+  elem.addEventListener("click", (evt)=>{
+    // Display the ID of that clicked element in console
+    let source = evt.target.id;
+    userChoices.push(source);
+    // Call visual activation
+    activateButton(source);
+    // Get a specific attribute from clicked element
+    const data = elem.getAttribute("data-button");
+    // Get the audio element with that attribute
+    const sound = document.querySelector(`[data-sound='${data}']`);
+    // Actually play the sound selected
+    sound.play();
   });
+});
+
+// Start button to start game
+
+var startBtn = document.getElementById("start-button");
+
+// Handle click on start button
+startBtn.addEventListener("click", () => {
+  // Reset points to 0
+  document.getElementById("points").innerText = "Points: 0";
+  // Reset userChoices to restart game
+  userChoices = [];
+  gamePattern = [];
+  playTurn();
 });
