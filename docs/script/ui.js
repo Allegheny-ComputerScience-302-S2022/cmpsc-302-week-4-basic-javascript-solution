@@ -4,7 +4,7 @@ var userChoices = [];
 var gamePattern = [];
 var points = 0;
 // Set delay for user response
-const delay = 7000; // <-- 7 seconds
+const delay = 2000; // <-- 7 seconds
 
 function playTurn() {
   let level = 0;
@@ -22,7 +22,6 @@ function playTurn() {
   // Player's part of turn
   setTimeout(() =>{
       if(validatePattern()){
-        level++;
         playTurn();
         points++;
         document.getElementById("points").innerText = `Points: ${points}`;
@@ -32,7 +31,7 @@ function playTurn() {
         sound.play();
         console.log("YOU LOSE!");
       }
-  }, (level + 1) * delay);
+  }, gamePattern.length * delay);
 }
 
 function activateButton(id) {
