@@ -32,6 +32,7 @@
         run: |
           source config/.pages.sh
           python config/.wave.py index.html
+          python config/.selenium.py index.html
           gradle grade
         if: always()
         env:   
